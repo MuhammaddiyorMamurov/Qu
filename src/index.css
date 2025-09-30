@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+@theme {
+    --default-font-family:'Merriweather Variable', "Arial" serif;
+}
+
+@layer base{
+  html {
+    @apply min-h-screen
+  }
+  body {
+    @apply min-h-screen
+  }
+  #root {
+    @apply min-h-screen flex flex-col
+  }
+}
+
+
+@layer utilities {
+  .container {
+    @apply mx-auto px-4
+  }
+}
