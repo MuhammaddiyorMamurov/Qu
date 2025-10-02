@@ -1,7 +1,11 @@
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { mainContext } from '../context/MainContext'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase/firebase.config'
+import toast from 'react-hot-toast'
+import { changeLanguage } from 'i18next'
 
 const languages = [
     {
@@ -23,12 +27,26 @@ const languages = [
 
 function Navbar() {
     const {state: {userInfo} , dispatch} = useContext(mainContext)
-    const {i18n} = useTranslation()
+    const {t,i18n} = useTranslation()
+
+    console.log(userInfo);
+    
 
     const logout = ()=>{
+      
+      signOut(auth)
+      .then(() => {
+        toast.success(t("logout"))
+      }).catch((error) => {
+        toast.error(t("uncompleted"))
+      });
         dispatch({type:"LOGOUT"})
     }
-    console.log(userInfo);
+      
+    const changeLanguage = (lang)=> {
+      toast.success(t("language"))
+      i18n.changeLanguage(lang.text)
+    }
     
 
 
@@ -52,7 +70,7 @@ function Navbar() {
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-xl">
    {languages.map((lang)=>{
     return <li key={lang.id}>
-        <button onClick={()=> i18n.changeLanguage(lang.text)}>
+        <button onClick={()=>changeLanguage(lang)}>
         <img 
             src={lang.icon} 
             alt={i18n.language}
@@ -69,8 +87,8 @@ function Navbar() {
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    alt="user avatar"
+                    src={userInfo.photoURL} />
                 </div>
               </div>
               <ul

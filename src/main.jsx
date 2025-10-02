@@ -6,9 +6,11 @@ import App from './App.jsx'
 import '@fontsource-variable/merriweather';
 import MainContext from './context/MainContext.jsx';
 import "./i18n";
+import { Toaster } from 'react-hot-toast';
 
 createRoot(document.getElementById('root')).render(
   <MainContext>
     <App />
+    <Toaster/>
   </MainContext>,
 )

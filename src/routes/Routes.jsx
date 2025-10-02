@@ -26,11 +26,11 @@ function Routes() {
         },
         {
             path:"/login",
-            element: state.isAuth ? <Navigate to="/" replace={true}/> : <Login/>
+            element: state.userInfo ? <Navigate to="/" replace={true}/> : <Login/>
         },
         {
             path:"/signup",
-            element: state.isAuth ? <Navigate to="/" replace={true}/> : <SignUp/>
+            element: state.userInfo ? <Navigate to="/" replace={true}/> : <SignUp/>
         }
     ])
   return <RouterProvider router={router}/>

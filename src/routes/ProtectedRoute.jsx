@@ -5,7 +5,7 @@ import { mainContext } from '../context/MainContext'
 function ProtectedRoute({children}) {
     const {state} = useContext(mainContext)
 
-    if(!state.isAuth) return <Navigate to="/login" replace={true}/>
+    if(!state.userInfo) return <Navigate to="/login" replace={true}/>
   return <>
     {children}
   </>
