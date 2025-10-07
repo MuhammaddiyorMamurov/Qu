@@ -1,0 +1,19 @@
+{
+    "Welcome": "Xush kelibsiz",
+     "today": "Bugun loyihamda birinchi marta i18n kutubxonasidan foydalandim. Bu yordamida dasturimni ko‘p tilli qilish imkoniyati paydo bo‘ldi. Matnlarni alohida fayllarda saqlab, foydalanuvchi tanlagan tilga qarab avtomatik yangilanadigan qilib qo‘ydim. Shu tajriba menga global foydalanuvchilar uchun ochiq dastur yaratishda internationalization qanchalik muhimligini ko‘rsatdi.",
+     "body":"Avvaliga biroz chalkash tuyuldi, chunki bundan oldin internationalization bilan ishlamagan edim. Lekin hujjatlarni o‘qib, kichik tajribalar qilib ko‘rganimdan keyin hammasi ancha tushunarli bo‘lib ketdi. Endi dasturimni ingliz, o‘zbek va rus tillarida ko‘rsatishim mumkin va foydalanuvchi bemalol tilni almashtirishi mumkin.",
+     "signup":"Ro'yhatdan o'tish",
+     "enter":"Kirish",
+     "logout":"Muvaffaqiyatli chiqdingiz",
+     "uncompleted":"Chiqish yakunlanmadi",
+     "language":"Til o'zgartirildi",
+     "tosignup":"Ro'yhatdan o'tish",
+     "ikki xil parol": "Passwordlar bir xil emas",
+     "error": "Bunday foydalanuvchi mavjud emas",
+     "lan":"Ingliz tilida:",
+     "lanuz":"O'zbek tilida:",
+     "lanru": "Ruscha tilida:",
+     "author":"Iqtibosning muallifi:",
+     "send":"Yuborish",
+     "back":"Orqaga"
+  }

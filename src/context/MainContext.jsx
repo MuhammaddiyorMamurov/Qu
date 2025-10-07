@@ -1,29 +1,37 @@
 import React, { createContext, useReducer } from 'react'
 
-export const mainContext = createContext()
+// Context obyekt
+export const MainContext = createContext()
 
-const reducer = function(state,action){
-    switch(action.type){
-        case "LOGIN":
-            return {...state, isAuth: true, userInfo:action.payload}
-            case "LOGOUT":
-                return{...state, isAuth:false,userInfo:null}
-            default:
-                return state;
-    }
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return { ...state, isAuth: true, userInfo: action.payload }
+    case "LOGOUT":
+      return { ...state, isAuth: false, userInfo: null }
+    case "LIKED":
+      return { ...state,likedQuotes: action.payload}
+    default:
+      return state
+  }
 }
+
 const initialState = {
-    isAuth:true,
-    userInfo: null,
+  isAuth: true,
+  userInfo: null,
+  likedQuotes:JSON.parse(localStorage.getItem("liked-quotes") || []),
 }
- 
-function MainContext({ children }) {
 
-    const [state, dispatch] = useReducer(reducer, initialState)
+// Provider komponent
+function MainProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState)
 
-  return <mainContext.Provider value={{state,dispatch}}>
+  return (
+    <MainContext.Provider value={{ state, dispatch }}>
       {children}
-  </mainContext.Provider>
+    </MainContext.Provider>
+  )
 }
 
-export default MainContext
+export default MainProvider
+

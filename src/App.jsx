@@ -2,10 +2,11 @@ import React, { useContext, useLayoutEffect } from 'react'
 import Routes from './routes/Routes'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase/firebase.config'
-import { mainContext } from './context/MainContext'
+import { MainContext } from './context/MainContext'
 
 function App() {
-  const {state:{isAuth}, dispatch } = useContext(mainContext)
+
+  const {state:{isAuth}, dispatch } = useContext(MainContext)
 
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {

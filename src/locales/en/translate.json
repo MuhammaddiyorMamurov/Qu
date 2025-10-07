@@ -1,0 +1,20 @@
+{
+    "Welcome": "Welcome ",
+    "today": "Today I used i18n for the first time in my project. It allows me to make my app multilingual by separating texts into different language files. Now users can easily switch between languages, and the app content updates automatically. This experience showed me how important internationalization is for creating applications that are accessible worldwide.",
+    "body":"At first, I felt a little confused, because I had never worked with internationalization before. But after reading the documentation and experimenting with small examples, I quickly understood how the configuration works. Now, with just a few lines of setup, my application can display content in English, Uzbek, and Russian, and users can switch between these languages seamlessly.",
+    "signup":"SIGNUP",
+    "enter": "Enter",
+    "logout":"Successfully logout",
+    "uncompleted":"Logout failed",
+    "language":"Language changed",
+    "tosignup":"Don't have an account,yet?",
+    "ikki xil parol": "Passwords are not the same",
+    "error":"This user does not exist",
+    "lan":"in English:",
+    "lanuz":"in Uzbek:",
+    "lanru": "in Russian:",
+    "author": "Author of the quote:",
+    "send":"Send",
+    "back":"Back"
+}
+  

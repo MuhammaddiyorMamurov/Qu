@@ -1,40 +1,61 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 // import { mainContext } from '../context/MainContext'
 import { useTranslation } from 'react-i18next'
 import { FcGoogle } from "react-icons/fc";
-import { mainContext } from '../context/MainContext';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { MainContext } from '../context/MainContext';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/firebase.config';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 function SignUp() {
-   const {dispatch}  = useContext(mainContext)
+    const passwordInputRef = useRef()
+   const passwordInputAgain = useRef()
+   const {dispatch}  = useContext(MainContext)
 
       const {t} = useTranslation()
   
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
           e.preventDefault()
   
           const formData = new FormData(e.target)
+
   
+          if(formData.get("password") !== formData.get("password-again")){
+            passwordInputAgain.current.classList.add("input-error")
+            passwordInputRef.current.classList.add("input-error")
+            passwordInputRef.current.value = ''
+            passwordInputAgain.current.value = ''
+            toast.error(t("ikki xil parol"))
+            return
+          }
 
-          createUserWithEmailAndPassword(
-            auth, 
-            formData.get("email"), 
-            formData.get("password")
-          )
+          try{
+            const userCredential = await createUserWithEmailAndPassword(
+              auth, 
+              formData.get("email"), 
+              formData.get("password"))
 
-     .then((userCredential) => {
-      const user = userCredential.user;
-      dispatch({type:"LOGIN", payload:{...user, displayName:formData.get("fullname"), photoURL:"https://api.dicebear.com/9.x/initials/svg?seed="+ formData.get("email")}})
-      
-      toast.success("Welcome!")
-  })
-  .catch((error) => {
-    const errorMessage = error.message;
-    toast.error(errorMessage)
-  });
+              const user = userCredential.user;
+
+              await updateProfile(user,{
+                photoURL:"https://api.dicebear.com/9.x/initials/svg?seed="+ formData.get("email"),
+                displayName:formData.get("fullname"),
+              })
+
+              dispatch({type:"LOGIN", payload:user
+                
+              })
+               toast.success("Welcome!")
+          }catch(error){
+            const errorMessage = error.message;
+           toast.error(errorMessage)
+          }
+
+         
+
+     
+  
 
           
   
@@ -67,8 +88,12 @@ function SignUp() {
               <div className='flex flex-col gap-2'>
                   <input className='input w-full' type="text" name='fullname' placeholder='enter your fullname' autoComplete='off' required/>
                   <input className='input w-full' type="email" name='email' placeholder='enter your login' autoComplete='off' required/>
-                  <input className='input w-full' type="password" name='password' placeholder='enter your password' autoComplete='off' required />
-                  <input className='input w-full' type="password" name='password-again' placeholder='repeat your password' autoComplete='off' required />
+                  <input
+                  ref={passwordInputRef}
+                  className='input w-full' type="password" name='password' placeholder='enter your password' autoComplete='off' required />
+                  <input
+                  ref={passwordInputAgain}
+                   className='input w-full' type="password" name='password-again' placeholder='repeat your password' autoComplete='off' required />
               </div>
               <Link className='link' to={"/login"}>Already have an account?</Link>
               <button onClick={handleGoogleLogin} className='btn btn-neutral' type='button'>

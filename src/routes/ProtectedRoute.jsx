@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { mainContext } from '../context/MainContext'
+import { MainContext } from '../context/MainContext'
 
 function ProtectedRoute({children}) {
-    const {state} = useContext(mainContext)
+    const {state} = useContext(MainContext)
 
     if(!state.userInfo) return <Navigate to="/login" replace={true}/>
   return <>

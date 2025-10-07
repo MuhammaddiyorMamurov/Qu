@@ -4,11 +4,12 @@ import Home from '../pages/Home'
 import MainLayout from '../layouts/MainLayout'
 import Login from '../pages/Login'
 import ProtectedRoute from './ProtectedRoute'
-import { mainContext } from '../context/MainContext'
+import { MainContext } from '../context/MainContext'
 import SignUp from '../pages/SignUp'
+import CreateQuote from '../pages/CreateQuote'
 
 function Routes() {
-    const {state} = useContext(mainContext)
+    const {state} = useContext(MainContext)
     const router = createBrowserRouter([
         {
             path:"/",
@@ -21,6 +22,10 @@ function Routes() {
                 {
                     index:true,
                     element:<Home/>
+                },
+                {
+                path:"/create-quote",
+                element:<CreateQuote/>,
                 }
             ]
         },
